@@ -1,7 +1,15 @@
 package com.example.domibe.global.security.exception;
 
+import com.example.domibe.global.excpetion.ErrorCode;
+import lombok.Getter;
+
+@Getter
 public class JwtExpiredException extends RuntimeException {
-  public JwtExpiredException(String message) {
-    super(message);
+
+  private final ErrorCode errorCode;
+
+  public JwtExpiredException() {
+    super(ErrorCode.EXPIRED_TOKEN.getMessage());
+    this.errorCode = ErrorCode.EXPIRED_TOKEN;
   }
 }

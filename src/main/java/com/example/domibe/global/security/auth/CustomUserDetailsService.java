@@ -2,7 +2,6 @@ package com.example.domibe.global.security.auth;
 
 import com.example.domibe.domain.user.User;
 import com.example.domibe.domain.user.UserRepository;
-import com.example.domibe.global.security.exception.UserNofFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String accountId) {
     User user = userRepository.findByAccountId(accountId)
-        .orElseThrow(() -> new UserNofFoundException("dsf"));
+        .orElseThrow(() -> new UsernameNotFoundException(accountId));
     return new CustomUserDetails(user);
   }
 }

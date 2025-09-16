@@ -1,26 +1,38 @@
 package com.example.domibe.domain.user;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.domibe.global.security.auth.Role;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.management.relation.Role;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column(unique = true, nullable = false)
   private String accountId;
+
+  @Column(nullable = false)
   private String password;
-  private int grade;
-  private int classroom;
-  private int number;
+
+  @Column(nullable = false)
+  private int studentNumber;
+
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private Role role;
-  private Date createdAt;
+
+  @Column(nullable = false, updatable = false)
+  private LocalDate createdAt;
 }
