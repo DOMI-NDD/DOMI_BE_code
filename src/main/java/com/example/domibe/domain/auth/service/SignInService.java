@@ -1,7 +1,7 @@
 package com.example.domibe.domain.auth.service;
 
-import com.example.domibe.domain.auth.dto.SignInRequest;
-import com.example.domibe.domain.auth.dto.TokenResponse;
+import com.example.domibe.domain.auth.dto.request.SignInRequest;
+import com.example.domibe.domain.auth.dto.response.TokenResponse;
 import com.example.domibe.domain.auth.exception.AccountNotFoundException;
 import com.example.domibe.domain.auth.exception.IncorrectPasswordException;
 import com.example.domibe.domain.user.User;

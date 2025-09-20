@@ -1,8 +1,8 @@
 package com.example.domibe.domain.auth.controller;
 
-import com.example.domibe.domain.auth.dto.SignInRequest;
-import com.example.domibe.domain.auth.dto.SignUpRequest;
-import com.example.domibe.domain.auth.dto.TokenResponse;
+import com.example.domibe.domain.auth.dto.request.SignInRequest;
+import com.example.domibe.domain.auth.dto.request.SignUpRequest;
+import com.example.domibe.domain.auth.dto.response.TokenResponse;
 import com.example.domibe.domain.auth.service.SignInService;
 import com.example.domibe.domain.auth.service.SignUpService;
 import lombok.RequiredArgsConstructor;
@@ -18,12 +18,12 @@ public class AuthController {
   private final SignUpService signUpService;
 
   @PostMapping("/sign-up")
-  public ResponseEntity<TokenResponse> signUp(@RequestBody SignUpRequest signUpRequest) {
-    return ResponseEntity.ok(signUpService.execute(signUpRequest));
+  public TokenResponse signUp(@RequestBody SignUpRequest signUpRequest) {
+    return signUpService.execute(signUpRequest);
   }
 
   @PostMapping("/sign-in")
-  public ResponseEntity<TokenResponse> signIn(@RequestBody SignInRequest signInRequest) {
-    return ResponseEntity.ok(signInService.execute(signInRequest));
+  public TokenResponse signIn(@RequestBody SignInRequest signInRequest) {
+    return signInService.execute(signInRequest);
   }
 }

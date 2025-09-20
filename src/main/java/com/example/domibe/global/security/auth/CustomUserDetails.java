@@ -20,6 +20,9 @@ public class CustomUserDetails implements UserDetails {
     return new ArrayList<>(Collections.singleton(new SimpleGrantedAuthority("ROLE_"+user.getRole().toString())));
 
   }
+  public User getUser() {
+    return user;
+  }
 
   @Override
   public String getPassword() {

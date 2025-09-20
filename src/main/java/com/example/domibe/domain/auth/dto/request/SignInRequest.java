@@ -1,4 +1,4 @@
-package com.example.domibe.domain.auth.dto;
+package com.example.domibe.domain.auth.dto.request;
 
 
 import lombok.Getter;
