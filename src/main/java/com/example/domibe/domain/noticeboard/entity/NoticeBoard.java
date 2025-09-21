@@ -37,6 +37,11 @@
         @JoinColumn(name = "user_id")
         private User user;
 
+        public void update(String title, String detail,LocalDateTime updatedAt) {
+            this.title = title;
+            this.detail = detail;
+            this.updatedAt = updatedAt;
+        }
 
 
     }

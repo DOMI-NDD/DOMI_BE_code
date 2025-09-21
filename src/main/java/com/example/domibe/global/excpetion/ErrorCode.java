@@ -14,7 +14,9 @@ public enum ErrorCode {
 
   ACCOUNT_ID_ALREADY_EXISTS(HttpStatus.CONFLICT,"account already exists"),
   ACCOUNT_NOT_FOUND(HttpStatus.NOT_FOUND,"account not found"),
-  INCORRECT_PASSWORD(HttpStatus.UNAUTHORIZED,"incorrect password");
+  INCORRECT_PASSWORD(HttpStatus.UNAUTHORIZED,"incorrect password"),
+
+  NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND,"notice board not found");
 
   private final HttpStatus httpStatus;
   private final String message;

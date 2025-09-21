@@ -3,6 +3,7 @@ package com.example.domibe.global.handler;
 import com.example.domibe.domain.auth.exception.AccountIdAlreadyExistsException;
 import com.example.domibe.domain.auth.exception.AccountNotFoundException;
 import com.example.domibe.domain.auth.exception.IncorrectPasswordException;
+import com.example.domibe.domain.noticeboard.exception.NoticeBoardNotFoundException;
 import com.example.domibe.global.handler.dto.ErrorResponseDto;
 import com.example.domibe.global.security.exception.JwtExpiredException;
 import com.example.domibe.global.security.exception.JwtInvalidException;
@@ -37,6 +38,11 @@ public class GlobalExceptionHandler {
  @ExceptionHandler(IncorrectPasswordException.class)
  public ResponseEntity<ErrorResponseDto> handleIncorrectPasswordException(IncorrectPasswordException e) {
   return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto(e.getErrorCode().name(),e.getMessage()));
+ }
+
+ @ExceptionHandler(NoticeBoardNotFoundException.class)
+ public ResponseEntity<ErrorResponseDto> handleNoticeBoardNotFoundException(NoticeBoardNotFoundException e) {
+  return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponseDto(e.getErrorCode().name(),e.getMessage()));
  }
 
 }
