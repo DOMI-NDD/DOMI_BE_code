@@ -89,6 +89,25 @@ public class JwtTokenProvider {
     }
   }
 
+  public void validateRefreshToken(String accountId,String refreshToken) {
+
+    String key = REDIS_PREFIX + accountId;
+    String storedRefreshToken = redisTemplate.opsForValue().get(key);
+
+    if(storedRefreshToken==null) throw  new JwtExpiredException();
+
+    if(!refreshToken.equals(storedRefreshToken)) throw new JwtInvalidException();
+
+    validateToken(refreshToken);
+
+  }
+
+  public String reissueAccessToken(String accountId,String refreshToken) {
+    validateRefreshToken(accountId,refreshToken);
+
+    return generateAccessToken(accountId);
+  }
+
   public UsernamePasswordAuthenticationToken getAuthentication(String token) {
     Claims claims=getClaims(token);
     CustomUserDetails customUserDetails=(CustomUserDetails) authDetailsService.loadUserByUsername(claims.getSubject());
