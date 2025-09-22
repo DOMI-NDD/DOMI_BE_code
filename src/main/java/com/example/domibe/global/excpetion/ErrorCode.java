@@ -16,7 +16,8 @@ public enum ErrorCode {
   ACCOUNT_NOT_FOUND(HttpStatus.NOT_FOUND,"account not found"),
   INCORRECT_PASSWORD(HttpStatus.UNAUTHORIZED,"incorrect password"),
 
-  NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND,"notice board not found");
+  NOTICE_BOARD_NOT_FOUND(HttpStatus.NOT_FOUND,"notice board not found"),
+  POST_NOT_OWNER(HttpStatus.FORBIDDEN,"post not owner");
 
   private final HttpStatus httpStatus;
   private final String message;

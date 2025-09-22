@@ -3,6 +3,7 @@ package com.example.domibe.domain.noticeboard.controller;
 import com.example.domibe.domain.noticeboard.dto.request.NoticeBoardRequest;
 import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardResponse;
 import com.example.domibe.domain.noticeboard.service.NoticeBoardCreateService;
+import com.example.domibe.domain.noticeboard.service.NoticeBoardDeleteService;
 import com.example.domibe.domain.noticeboard.service.NoticeBoardUpdateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ public class NoticeBoardController {
 
     private final NoticeBoardCreateService noticeBoardCreateService;
     private final NoticeBoardUpdateService noticeBoardUpdateService;
+    private final NoticeBoardDeleteService noticeBoardDeleteService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,6 +33,12 @@ public class NoticeBoardController {
     @ResponseStatus(HttpStatus.OK)
     public void updateNoticeBoard(@PathVariable Integer id, @RequestBody @Valid NoticeBoardRequest request, Authentication authentication) {
          noticeBoardUpdateService.execute(request,id,authentication);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteNoticeBoard(@PathVariable Integer id,Authentication authentication) {
+        noticeBoardDeleteService.execute(id,authentication);
     }
 
 

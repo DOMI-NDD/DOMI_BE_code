@@ -6,6 +6,7 @@ import com.example.domibe.domain.auth.dto.response.TokenResponse;
 import com.example.domibe.domain.auth.service.SignInService;
 import com.example.domibe.domain.auth.service.SignUpService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,11 +19,13 @@ public class AuthController {
   private final SignUpService signUpService;
 
   @PostMapping("/sign-up")
+  @ResponseStatus(HttpStatus.CREATED)
   public TokenResponse signUp(@RequestBody SignUpRequest signUpRequest) {
     return signUpService.execute(signUpRequest);
   }
 
   @PostMapping("/sign-in")
+  @ResponseStatus(HttpStatus.OK)
   public TokenResponse signIn(@RequestBody SignInRequest signInRequest) {
     return signInService.execute(signInRequest);
   }
