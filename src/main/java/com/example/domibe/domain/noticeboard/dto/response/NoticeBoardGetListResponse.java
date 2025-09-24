@@ -4,15 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
 @Builder
-public class NoticeBoardResponse {
+public class NoticeBoardGetListResponse {
+    private Integer id;
     private String title;
-    private String detail;
     private String writer;
     private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

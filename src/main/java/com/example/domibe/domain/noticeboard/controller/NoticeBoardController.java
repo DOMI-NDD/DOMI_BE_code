@@ -1,15 +1,16 @@
 package com.example.domibe.domain.noticeboard.controller;
 
 import com.example.domibe.domain.noticeboard.dto.request.NoticeBoardRequest;
-import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardResponse;
-import com.example.domibe.domain.noticeboard.service.NoticeBoardCreateService;
-import com.example.domibe.domain.noticeboard.service.NoticeBoardDeleteService;
-import com.example.domibe.domain.noticeboard.service.NoticeBoardUpdateService;
+import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardGetDetailResponse;
+import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardGetListResponse;
+import com.example.domibe.domain.noticeboard.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/notice-boards")
@@ -19,14 +20,16 @@ public class NoticeBoardController {
     private final NoticeBoardCreateService noticeBoardCreateService;
     private final NoticeBoardUpdateService noticeBoardUpdateService;
     private final NoticeBoardDeleteService noticeBoardDeleteService;
+    private final NoticeBoardGetListService noticeBoardGetListService;
+    private final NoticeBoardGetDetailService noticeBoardGetDetailService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public NoticeBoardResponse createNoticeBoard(
+    public void createNoticeBoard(
             @RequestBody @Valid NoticeBoardRequest request,
             Authentication authentication) {
 
-        return noticeBoardCreateService.execute(request,authentication);
+         noticeBoardCreateService.execute(request,authentication);
     }
 
     @PutMapping("/{id}")
@@ -40,6 +43,19 @@ public class NoticeBoardController {
     public void deleteNoticeBoard(@PathVariable Integer id,Authentication authentication) {
         noticeBoardDeleteService.execute(id,authentication);
     }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public List<NoticeBoardGetListResponse> getNoticeBoards(@RequestParam(value = "keyword",required = false) String keyword) {
+        return noticeBoardGetListService.execute(keyword);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public NoticeBoardGetDetailResponse getNoticeBoardDetail(@PathVariable Integer id) {
+        return noticeBoardGetDetailService.execute(id);
+    }
+
 
 
 

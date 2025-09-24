@@ -1,7 +1,7 @@
 package com.example.domibe.domain.noticeboard.service;
 
 import com.example.domibe.domain.noticeboard.dto.request.NoticeBoardRequest;
-import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardResponse;
+import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardGetListResponse;
 import com.example.domibe.domain.noticeboard.entity.NoticeBoard;
 import com.example.domibe.domain.noticeboard.repository.NoticeBoardRepository;
 import com.example.domibe.domain.user.User;
@@ -20,7 +20,7 @@ public class NoticeBoardCreateService {
     private final NoticeBoardRepository noticeBoardRepository;
 
     @Transactional
-    public NoticeBoardResponse execute(NoticeBoardRequest noticeBoardCreateRequest, Authentication authentication) {
+    public void execute(NoticeBoardRequest noticeBoardCreateRequest, Authentication authentication) {
 
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = userDetails.getUser();
@@ -33,15 +33,7 @@ public class NoticeBoardCreateService {
                 .user(user)
                 .build();
 
-        NoticeBoard savedNoticeBoard = noticeBoardRepository.save(noticeBoard);
-
-        return NoticeBoardResponse.builder()
-                .title(savedNoticeBoard.getTitle())
-                .detail(savedNoticeBoard.getDetail())
-                .createdAt(savedNoticeBoard.getCreatedAt())
-                .updatedAt(savedNoticeBoard.getUpdatedAt())
-                .writer(savedNoticeBoard.getUser().getAccountId())
-                .build();
+        noticeBoardRepository.save(noticeBoard);
     }
 
 }
