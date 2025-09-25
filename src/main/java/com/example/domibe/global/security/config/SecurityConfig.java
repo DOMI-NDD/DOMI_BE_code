@@ -43,6 +43,8 @@ public class SecurityConfig {
         .sessionManagement(sessionManagement ->sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .exceptionHandling(exception->exception.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
 
+        .cors(cors->{})
+
 
         //경로별 권한설정
         .authorizeHttpRequests(authorize->authorize
