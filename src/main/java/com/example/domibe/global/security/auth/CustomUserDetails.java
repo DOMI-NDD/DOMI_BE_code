@@ -19,8 +19,11 @@ public class CustomUserDetails implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return new ArrayList<>(Collections.singleton(new SimpleGrantedAuthority("ROLE_"+user.getRole().toString())));
-
+    String role = user.getRole().toString();
+    if (!role.startsWith("ROLE_")) {
+      role = "ROLE_" + role;
+    }
+    return Collections.singleton(new SimpleGrantedAuthority(role));
   }
   public User getUser() {
     return user;

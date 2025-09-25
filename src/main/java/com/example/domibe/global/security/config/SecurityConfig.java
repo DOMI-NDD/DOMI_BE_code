@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -25,6 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
   private final JwtTokenFilter jwtTokenFilter;
+  private final AccessDeniedHandler accessDeniedHandler;
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -41,8 +43,10 @@ public class SecurityConfig {
 
         .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
         .sessionManagement(sessionManagement ->sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .exceptionHandling(exception->exception.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-
+        .exceptionHandling(exception -> exception
+        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+        .accessDeniedHandler(accessDeniedHandler)
+    )
         .cors(cors->{})
 
 
