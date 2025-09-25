@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 public class NoticeBoardRequest {
 
-    @NotBlank(message = "제목은 필수 입력값입니다.")
+    @NotBlank
     private String title;
 
-    @NotBlank(message = "내용은 필수 입력값입니다.")
+    @NotBlank
     private String detail;
 
 }

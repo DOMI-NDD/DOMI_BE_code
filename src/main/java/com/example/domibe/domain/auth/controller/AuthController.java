@@ -7,6 +7,7 @@ import com.example.domibe.domain.auth.dto.response.TokenResponse;
 import com.example.domibe.domain.auth.service.ReissueService;
 import com.example.domibe.domain.auth.service.SignInService;
 import com.example.domibe.domain.auth.service.SignUpService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,19 +23,19 @@ public class AuthController {
 
   @PostMapping("/sign-up")
   @ResponseStatus(HttpStatus.CREATED)
-  public TokenResponse signUp(@RequestBody SignUpRequest signUpRequest) {
+  public TokenResponse signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
     return signUpService.execute(signUpRequest);
   }
 
   @PostMapping("/sign-in")
   @ResponseStatus(HttpStatus.OK)
-  public TokenResponse signIn(@RequestBody SignInRequest signInRequest) {
+  public TokenResponse signIn(@RequestBody @Valid SignInRequest signInRequest) {
     return signInService.execute(signInRequest);
   }
 
   @PostMapping("/reissue")
   @ResponseStatus(HttpStatus.OK)
-  public TokenResponse reissue(@RequestBody ReissueRequest reissueRequest) {
+  public TokenResponse reissue(@RequestBody @Valid ReissueRequest reissueRequest) {
     return reissueService.execute(reissueRequest);
   }
 }

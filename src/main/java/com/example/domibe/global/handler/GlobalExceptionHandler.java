@@ -9,13 +9,23 @@ import com.example.domibe.global.excpetion.ErrorCode;
 import com.example.domibe.global.handler.dto.ErrorResponseDto;
 import com.example.domibe.global.security.exception.JwtExpiredException;
 import com.example.domibe.global.security.exception.JwtInvalidException;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+ @ExceptionHandler(MethodArgumentNotValidException.class)
+ public ResponseEntity<ErrorResponseDto> handleValidationException(MethodArgumentNotValidException e) {
+  return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponseDto("NOT_NULL_OR_BLANK",ErrorCode.NOT_NULL_OR_BLANK.getMessage()));
+ }
 
  @ExceptionHandler(JwtExpiredException.class)
  public ResponseEntity<ErrorResponseDto> handleJwtExpiredTokenException(JwtExpiredException e) {
