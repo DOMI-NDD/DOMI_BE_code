@@ -1,7 +1,7 @@
 package com.example.domibe.domain.auth.service;
 
 import com.example.domibe.domain.auth.dto.request.SignInRequest;
-import com.example.domibe.domain.auth.dto.response.TokenResponse;
+import com.example.domibe.domain.auth.dto.response.SignInResponse;
 import com.example.domibe.domain.auth.exception.AccountNotFoundException;
 import com.example.domibe.domain.auth.exception.IncorrectPasswordException;
 import com.example.domibe.domain.user.User;
@@ -18,7 +18,7 @@ public class SignInService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
 
-  public TokenResponse execute(SignInRequest signInRequest) {
+  public SignInResponse execute(SignInRequest signInRequest) {
     User user = userRepository.findByAccountId(signInRequest.getAccountId())
         .orElseThrow((AccountNotFoundException::new));
 
@@ -29,7 +29,7 @@ public class SignInService {
     String accessToken = jwtTokenProvider.generateAccessToken(signInRequest.getAccountId());
     String refreshToken = jwtTokenProvider.generateRefreshToken(signInRequest.getAccountId());
 
-    return new TokenResponse(accessToken, refreshToken);
+    return new SignInResponse(accessToken, refreshToken,user.getUsername());
   }
 
 }

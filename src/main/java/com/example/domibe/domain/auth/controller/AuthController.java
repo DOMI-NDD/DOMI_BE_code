@@ -3,6 +3,7 @@ package com.example.domibe.domain.auth.controller;
 import com.example.domibe.domain.auth.dto.request.ReissueRequest;
 import com.example.domibe.domain.auth.dto.request.SignInRequest;
 import com.example.domibe.domain.auth.dto.request.SignUpRequest;
+import com.example.domibe.domain.auth.dto.response.SignInResponse;
 import com.example.domibe.domain.auth.dto.response.TokenResponse;
 import com.example.domibe.domain.auth.service.ReissueService;
 import com.example.domibe.domain.auth.service.SignInService;
@@ -29,7 +30,7 @@ public class AuthController {
 
   @PostMapping("/sign-in")
   @ResponseStatus(HttpStatus.OK)
-  public TokenResponse signIn(@RequestBody @Valid SignInRequest signInRequest) {
+  public SignInResponse signIn(@RequestBody @Valid SignInRequest signInRequest) {
     return signInService.execute(signInRequest);
   }
 
