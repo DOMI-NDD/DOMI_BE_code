@@ -1,6 +1,6 @@
 package com.example.domibe.domain.noticeboard.service;
 
-import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardGetListResponse;
+import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardResponse;
 import com.example.domibe.domain.noticeboard.entity.NoticeBoard;
 import com.example.domibe.domain.noticeboard.repository.NoticeBoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +11,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class NoticeBoardGetListService {
+public class NoticeBoardGetService {
 
   private final NoticeBoardRepository noticeBoardRepository;
 
-  public List<NoticeBoardGetListResponse> execute(String keyword) {
+  public List<NoticeBoardResponse> execute(String keyword) {
     Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
     List<NoticeBoard> noticeBoards;
 
@@ -26,9 +26,10 @@ public class NoticeBoardGetListService {
     }
 
     return noticeBoards.stream()
-        .map(nb -> new NoticeBoardGetListResponse(
+        .map(nb -> new NoticeBoardResponse(
             nb.getId(),
             nb.getTitle(),
+            nb.getDetail(),
             nb.getUser().getAccountId(),
             nb.getCreatedAt()
         ))

@@ -1,7 +1,6 @@
 package com.example.domibe.domain.noticeboard.service;
 
 import com.example.domibe.domain.noticeboard.dto.request.NoticeBoardRequest;
-import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardGetListResponse;
 import com.example.domibe.domain.noticeboard.entity.NoticeBoard;
 import com.example.domibe.domain.noticeboard.repository.NoticeBoardRepository;
 import com.example.domibe.domain.user.User;

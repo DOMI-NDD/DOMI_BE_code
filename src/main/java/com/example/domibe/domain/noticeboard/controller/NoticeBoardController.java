@@ -1,8 +1,7 @@
 package com.example.domibe.domain.noticeboard.controller;
 
 import com.example.domibe.domain.noticeboard.dto.request.NoticeBoardRequest;
-import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardGetDetailResponse;
-import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardGetListResponse;
+import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardResponse;
 import com.example.domibe.domain.noticeboard.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +19,7 @@ public class NoticeBoardController {
     private final NoticeBoardCreateService noticeBoardCreateService;
     private final NoticeBoardUpdateService noticeBoardUpdateService;
     private final NoticeBoardDeleteService noticeBoardDeleteService;
-    private final NoticeBoardGetListService noticeBoardGetListService;
-    private final NoticeBoardGetDetailService noticeBoardGetDetailService;
+    private final NoticeBoardGetService noticeBoardGetListService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -46,14 +44,8 @@ public class NoticeBoardController {
 
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
-    public List<NoticeBoardGetListResponse> getNoticeBoards(@RequestParam(value = "keyword",required = false) String keyword) {
+    public List<NoticeBoardResponse> getNoticeBoards(@RequestParam(value = "keyword",required = false) String keyword) {
         return noticeBoardGetListService.execute(keyword);
-    }
-
-    @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public NoticeBoardGetDetailResponse getNoticeBoardDetail(@PathVariable Integer id) {
-        return noticeBoardGetDetailService.execute(id);
     }
 
 
