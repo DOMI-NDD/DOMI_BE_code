@@ -55,6 +55,8 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.POST,"/notice-boards").hasRole("TEACHER")
             .requestMatchers(HttpMethod.PUT,"/notice-boards").hasRole("TEACHER")
             .requestMatchers(HttpMethod.DELETE,"/notice-boards").hasRole("TEACHER")
+            .requestMatchers(HttpMethod.POST,"/calendars").hasRole("TEACHER")
+            .requestMatchers(HttpMethod.DELETE,"/calendars").hasRole("TEACHER")
             .requestMatchers("/auths/**").permitAll()
             .anyRequest().authenticated())
 

@@ -35,13 +35,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
       filterChain.doFilter(request, response);
     }
 
-    catch(JwtExpiredException e){
+    catch(JwtExpiredException |JwtInvalidException e){
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
       response.getWriter().write(e.getMessage());
-    }
-    catch (JwtInvalidException e) {
-      response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-      response.getWriter().write(e.getMessage());
+
     }
     catch (Exception e) {
       response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

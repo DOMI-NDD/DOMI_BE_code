@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Calendar {
+public class CalendarEvent {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -25,5 +25,8 @@ public class Calendar {
   private String detail;
 
   @Column(nullable = false)
-  private LocalDate date;
+  private LocalDate startDate;
+
+  @Column(nullable = false)
+  private LocalDate endDate;
 }

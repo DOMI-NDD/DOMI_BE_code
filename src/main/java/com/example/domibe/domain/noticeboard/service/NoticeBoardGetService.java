@@ -30,7 +30,7 @@ public class NoticeBoardGetService {
             nb.getId(),
             nb.getTitle(),
             nb.getDetail(),
-            nb.getUser().getAccountId(),
+            nb.getUser().getUsername(),
             nb.getCreatedAt()
         ))
         .toList();
