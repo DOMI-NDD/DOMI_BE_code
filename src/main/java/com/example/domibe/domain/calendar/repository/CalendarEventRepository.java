@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CalendarRepository extends JpaRepository<CalendarEvent, Integer> {
+public interface CalendarEventRepository extends JpaRepository<CalendarEvent, Integer> {
   @Query("SELECT e FROM CalendarEvent e WHERE MONTH(e.startDate) = :month AND YEAR(e.startDate) = :year")
   List<CalendarEvent> findByMonthAndYear(@Param("year") int year, @Param("month") int month);
 

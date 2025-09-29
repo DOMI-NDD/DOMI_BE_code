@@ -1,20 +1,12 @@
 package com.example.domibe.domain.calendar.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-import java.time.LocalDate;
-
 @Getter
-public class CreateEventRequest {
+public class UpdateEventRequest {
+
   @NotBlank
   private String title;
-
   private String detail;
-  @NotNull
-  private LocalDate startDate;
-  @NotNull
-  private LocalDate endDate;
-
 }

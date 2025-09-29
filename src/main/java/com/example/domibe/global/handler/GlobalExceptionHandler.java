@@ -3,21 +3,19 @@ package com.example.domibe.global.handler;
 import com.example.domibe.domain.auth.exception.AccountIdAlreadyExistsException;
 import com.example.domibe.domain.auth.exception.AccountNotFoundException;
 import com.example.domibe.domain.auth.exception.IncorrectPasswordException;
+import com.example.domibe.domain.calendar.exception.NotFoundEventException;
 import com.example.domibe.domain.noticeboard.exception.NoticeBoardNotFoundException;
 import com.example.domibe.domain.noticeboard.exception.PostNotOwnerException;
 import com.example.domibe.global.excpetion.ErrorCode;
 import com.example.domibe.global.handler.dto.ErrorResponseDto;
 import com.example.domibe.global.security.exception.JwtExpiredException;
 import com.example.domibe.global.security.exception.JwtInvalidException;
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -60,6 +58,11 @@ public class GlobalExceptionHandler {
  @ExceptionHandler(PostNotOwnerException.class)
  public ResponseEntity<ErrorResponseDto> handlePostNotOwnerException(PostNotOwnerException e) {
   return ResponseEntity.status(ErrorCode.POST_NOT_OWNER.getHttpStatus()).body(new ErrorResponseDto(e.getErrorCode().name(),e.getMessage()));
+ }
+
+ @ExceptionHandler(NotFoundEventException.class)
+ public ResponseEntity<ErrorResponseDto> handleNotFoundEventException(NotFoundEventException e) {
+  return ResponseEntity.status(ErrorCode.NOT_FOUND_EVENT.getHttpStatus()).body(new ErrorResponseDto(e.getErrorCode().name(),e.getMessage()));
  }
 
 }
