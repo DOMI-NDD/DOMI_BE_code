@@ -21,5 +21,5 @@ public class NoticeBoardSpecification {
       return predicate;
     };
   }
-백엔드
+
 }
