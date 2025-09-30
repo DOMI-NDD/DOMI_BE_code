@@ -3,6 +3,7 @@ package com.example.domibe.domain.noticeboard.service;
 import com.example.domibe.domain.noticeboard.dto.response.NoticeBoardResponse;
 import com.example.domibe.domain.noticeboard.entity.NoticeBoard;
 import com.example.domibe.domain.noticeboard.repository.NoticeBoardRepository;
+import com.example.domibe.domain.noticeboard.specification.NoticeBoardSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class NoticeBoardGetService {
     if (keyword == null || keyword.isEmpty()) {
       noticeBoards = noticeBoardRepository.findAll(sort);
     } else {
-      noticeBoards = noticeBoardRepository.findByTitleContainingOrDetailContaining(keyword, keyword, sort);
+      noticeBoards = noticeBoardRepository.findAll(NoticeBoardSpecification.titleContainsWords(keyword),sort);
     }
 
     return noticeBoards.stream()
