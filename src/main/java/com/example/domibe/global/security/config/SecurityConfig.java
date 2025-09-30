@@ -53,10 +53,11 @@ public class SecurityConfig {
         //경로별 권한설정
         .authorizeHttpRequests(authorize->authorize
             .requestMatchers(HttpMethod.POST,"/notice-boards").hasRole("TEACHER")
-            .requestMatchers(HttpMethod.PUT,"/notice-boards").hasRole("TEACHER")
-            .requestMatchers(HttpMethod.DELETE,"/notice-boards").hasRole("TEACHER")
+            .requestMatchers(HttpMethod.PUT,"/notice-boards/**").hasRole("TEACHER")
+            .requestMatchers(HttpMethod.DELETE,"/notice-boards/**").hasRole("TEACHER")
             .requestMatchers(HttpMethod.POST,"/calendars").hasRole("TEACHER")
-            .requestMatchers(HttpMethod.DELETE,"/calendars").hasRole("TEACHER")
+            .requestMatchers(HttpMethod.PUT,"/calendars/**").hasRole("TEACHER")
+            .requestMatchers(HttpMethod.DELETE,"/calendars/**").hasRole("TEACHER")
             .requestMatchers("/auths/**").permitAll()
             .anyRequest().authenticated())
 
