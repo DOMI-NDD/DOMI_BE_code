@@ -5,6 +5,7 @@ import com.example.domibe.domain.calendar.repository.CalendarEventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -14,7 +15,13 @@ public class GetEventService {
   private final CalendarEventRepository calendarRepository;
 
   public List<CalendarEvent> execute(int year, int month) {
-    return calendarRepository.findByMonthAndYear(year, month);
+    LocalDate request = LocalDate.of(year, month, 1);
+
+    LocalDate previousMonth = request.minusMonths(1);
+
+    LocalDate nextMonth = request.plusMonths(1).withDayOfMonth(request.plusMonths(1).lengthOfMonth());
+
+    return calendarRepository.findByDateRange(previousMonth, nextMonth);
   }
 
 }
