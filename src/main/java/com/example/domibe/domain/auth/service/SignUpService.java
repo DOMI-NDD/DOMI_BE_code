@@ -31,7 +31,7 @@ public class SignUpService {
     User user = User.builder()
         .accountId(signUpRequest.getAccountId())
         .password(passwordEncoder.encode(signUpRequest.getPassword()))
-        .role(Role.ROLE_STUDENT)
+        .role(Role.ROLE_TEACHER)
         .createdAt(LocalDate.now())
         .username(signUpRequest.getUsername())
         .build();
