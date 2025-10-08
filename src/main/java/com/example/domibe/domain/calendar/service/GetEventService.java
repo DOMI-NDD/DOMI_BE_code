@@ -81,6 +81,9 @@ public class GetEventService {
 
         for (Element event : eventElements) {
           String eventName = event.ownText().trim();
+          if(eventName.isEmpty()) {
+            continue;
+          }
 
           CalendarEvent calendarEvent = CalendarEvent.builder()
                   .title(eventName)
