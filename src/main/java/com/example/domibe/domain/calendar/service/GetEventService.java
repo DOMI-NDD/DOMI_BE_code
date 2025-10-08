@@ -82,6 +82,10 @@ public class GetEventService {
         for (Element event : eventElements) {
           String eventName = event.ownText().trim();
 
+          if(eventName.isEmpty()) {
+            continue;
+          }
+
           CalendarEvent calendarEvent = CalendarEvent.builder()
                   .title(eventName)
                   .detail("학교 캘린더 일정입니다")
